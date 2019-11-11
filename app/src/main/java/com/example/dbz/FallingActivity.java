@@ -53,12 +53,10 @@ public class FallingActivity extends AppCompatActivity implements View.OnClickLi
         //初始化一个雪花样式的fallObject
         FallObject.Builder builder = new FallObject.Builder(getResources(), R.drawable.hongbao);
         FallObject fallObject = builder
-                .setSpeed(7,true)
-                .setSize(50,50,true)
-                .setWind(5,true,true)
+                .setSpeed(7,true) // 设置物体的初始下落速度
+                .setSize(50,50,true) // 设置物体大小
+                .setWind(5,true,true) // 设置风力等级、方向以及随机因素
                 .build();
-
-
         fallingView.addFallObject(fallObject,50);//添加50个下落物体对象
     }
 }

@@ -36,8 +36,6 @@ public class ViewHolder implements Holder<String> {
             if (data.substring(data.length() - 3).equals("gif")) {
                 try {
                     byte[] bytes = new GifDataAsyncTask().execute(data).get();
-                    Log.e("---", "---bytes = " + bytes);
-                    Log.e("---", "---bytes = " + bytes.length);
                     imageView.setBytes(bytes);
                     imageView.startAnimation();
                 } catch (ExecutionException e) {

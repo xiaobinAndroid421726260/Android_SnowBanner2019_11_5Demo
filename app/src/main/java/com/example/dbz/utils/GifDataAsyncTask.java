@@ -17,7 +17,7 @@ public class GifDataAsyncTask extends AsyncTask<String, Void, byte[]> {
         if (gifUrl == null)
             return null;
         try {
-            return new Utils().getByte(gifUrl);
+            return Utils.getsInstance().getByte(gifUrl);
         } catch (OutOfMemoryError e) {
             return null;
         }

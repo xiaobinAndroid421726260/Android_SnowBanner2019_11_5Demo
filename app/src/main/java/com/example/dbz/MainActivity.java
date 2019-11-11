@@ -2,6 +2,7 @@ package com.example.dbz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements IMainContract.View, View.OnClickListener {
 
-    private Button mRefresh, mRefreshFail, mSwitch, mStart, mStop;
+    private Button mRefresh, mRefreshFail, mSwitch, mStart, mStop, mBtnFall;
     private TextView mTextView;
     private ConvenientBanner mBanner;
     private Snow mSnow;
@@ -44,11 +45,13 @@ public class MainActivity extends AppCompatActivity implements IMainContract.Vie
         mStart = findViewById(R.id.btn_start);
         mStop = findViewById(R.id.btn_stop);
         mSnow = findViewById(R.id.snowView);
+        mBtnFall = findViewById(R.id.btn_falling);
         mRefresh.setOnClickListener(this);
         mRefreshFail.setOnClickListener(this);
         mSwitch.setOnClickListener(this);
         mStart.setOnClickListener(this);
         mStop.setOnClickListener(this);
+        mBtnFall.setOnClickListener(this);
     }
 
     @Override
@@ -123,12 +126,21 @@ public class MainActivity extends AppCompatActivity implements IMainContract.Vie
             case R.id.btn_stop:
                 mSnow.setVisibility(View.GONE);
                 break;
+            case R.id.btn_falling:
+                startActivity(new Intent(this, FallingActivity.class));
+                break;
         }
     }
 
     @Override
     public void setPersenter(IMainContract.Presenter persenter) {
         mPresenter = persenter;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mBanner.stopTurning();
     }
 
     @Override

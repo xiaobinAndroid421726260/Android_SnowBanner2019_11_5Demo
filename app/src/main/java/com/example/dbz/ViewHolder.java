@@ -1,6 +1,7 @@
 package com.example.dbz;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -32,20 +33,21 @@ public class ViewHolder implements Holder<String> {
     @Override
     public void UpdateUI(Context context, int position, String data) {
         if (data.length() > 3) {
-//          og.e("截取后三位data = " + data.substring(data.length() - 3));
-//            if (data.substring(data.length() - 3).equals("gif")) {
-//                try {
-//                    byte[] bytes = new GifDataAsyncTask().execute(data).get();
-//                    imageView.setBytes(bytes);
-//                    imageView.startAnimation();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            } else {
+            if (data.substring(data.length() - 3).equals("gif")) {
+                try {
+                    byte[] bytes = new GifDataAsyncTask().execute(data).get();
+                    Log.e("---", "---bytes = " + bytes);
+                    Log.e("---", "---bytes = " + bytes.length);
+                    imageView.setBytes(bytes);
+                    imageView.startAnimation();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
                 Picasso.with(context).load(data).into(imageView);
-//            }
+            }
         }
     }
 }

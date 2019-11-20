@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import com.ToxicBakery.viewpager.transforms.ABaseTransformer;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.example.dbz.snow.Snow;
+import com.example.dbz.view.CarouselDiagramViewPager;
+import com.example.dbz.view.OnItemViewPagerClickListener;
 
 import java.util.List;
 
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements IMainContract.Vie
     private ABaseTransformer mTransforemer;
     private String mTransforemerName;
     private IMainContract.Presenter mPresenter;
+    private LinearLayout mLinearLayout;
+    private CarouselDiagramViewPager<String> mViewPager;
     private int index = 0;
 
     @Override
@@ -46,12 +51,16 @@ public class MainActivity extends AppCompatActivity implements IMainContract.Vie
         mStop = findViewById(R.id.btn_stop);
         mSnow = findViewById(R.id.snowView);
         mBtnFall = findViewById(R.id.btn_falling);
+        mLinearLayout = findViewById(R.id.linearLayout);
         mRefresh.setOnClickListener(this);
         mRefreshFail.setOnClickListener(this);
         mSwitch.setOnClickListener(this);
         mStart.setOnClickListener(this);
         mStop.setOnClickListener(this);
         mBtnFall.setOnClickListener(this);
+
+        mViewPager = new CarouselDiagramViewPager<>(this);
+        mLinearLayout.addView(mViewPager.getContentView());
     }
 
     @Override
@@ -78,6 +87,17 @@ public class MainActivity extends AppCompatActivity implements IMainContract.Vie
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
                 .setPageTransformer(mTransforemer)
                 .startTurning(3000);
+    }
+
+    @Override
+    public void initBannerData(List<String> data) {
+        mViewPager.addData(data);
+        mViewPager.setOnItemViewPagerClickListener(new OnItemViewPagerClickListener() {
+            @Override
+            public <T> void onItemClick(T data, int position) {
+                Toast.makeText(MainActivity.this, "点击第" + position+ "条", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void switchAnimation() {
@@ -148,5 +168,4 @@ public class MainActivity extends AppCompatActivity implements IMainContract.Vie
         super.onDestroy();
         mPresenter.onDestroy();
     }
-
 }

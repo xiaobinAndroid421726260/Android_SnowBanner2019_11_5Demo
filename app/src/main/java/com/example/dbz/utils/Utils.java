@@ -1,6 +1,8 @@
 package com.example.dbz.utils;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
@@ -67,47 +69,25 @@ public class Utils {
         return null;
     }
 
-//    // 根据url返回byte[]
-//    public byte[] getByte(final String urlPath) {
-//        InputStream inputStream = null;
-//        try {
-//            URL url = new URL(urlPath);
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setRequestMethod("GET");
-//            conn.setConnectTimeout(20 * 1000);
-//            conn.setReadTimeout(20 * 1000);
-//            inputStream = conn.getInputStream();
-//            byte[] bytes = InputStreamToBytes(inputStream);
-//            if (bytes.length != 0) {
-//                return bytes;
-//            }
-//        } catch (final IOException e) {
-//            Log.e("---", "---e = " + e.getMessage());
-//        } finally {
-//            try {
-//                if (inputStream != null) {
-//                    inputStream.close();
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
 
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
 
-//    // 将InputStream转换成byte[]
-//    public byte[] InputStreamToBytes(InputStream is) {
-//        String str = "";
-//        byte[] readByte = new byte[1024];
-//        try {
-//            while ((is.read(readByte, 0, 1024)) != -1) {
-//                str += new String(readByte).trim();
-//            }
-//            return str.getBytes();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
+    public final static int getWindowsHeight(Activity activity) {
+        DisplayMetrics dm = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.heightPixels;
+    }
 }

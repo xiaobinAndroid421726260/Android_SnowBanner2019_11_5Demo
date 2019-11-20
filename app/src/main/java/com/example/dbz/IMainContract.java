@@ -21,6 +21,8 @@ public interface IMainContract {
         void showTasksList();
 
         void refreshData(List<String> data);
+
+        void initBannerData(List<String> data);
     }
 
     interface Presenter extends BasePresenter {

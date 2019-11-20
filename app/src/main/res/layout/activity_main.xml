@@ -33,6 +33,17 @@
                 android:layout_height="200dp"
                 app:canLoop="true" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#efefef"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:orientation="vertical" />
+
             <TextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"

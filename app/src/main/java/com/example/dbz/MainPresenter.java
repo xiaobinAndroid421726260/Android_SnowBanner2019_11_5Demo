@@ -51,7 +51,7 @@ public class MainPresenter implements IMainContract.Presenter{
     public void startTask() {
         mBannerDatas.clear();
         mBannerDatas.add(HttpUrl.banner_1);
-        mBannerDatas.add(HttpUrl.banner_2);
+//        mBannerDatas.add(HttpUrl.banner_2);
         mBannerDatas.add(HttpUrl.banner_3);
         mBannerDatas.add(HttpUrl.banner_4);
         mBannerDatas.add(HttpUrl.banner_5);
@@ -59,6 +59,7 @@ public class MainPresenter implements IMainContract.Presenter{
         mBannerDatas.add(HttpUrl.banner_7);
         isDataMissing = true;
         mMainView.refreshData(mBannerDatas);
+        mMainView.initBannerData(mBannerDatas);
     }
 
     @Override
